@@ -1,0 +1,41 @@
+*make sure you have installed node js in your device
+
+*make sure you have installed composer too.. 
+*after cloning this git repository to your vscode,
+ >>install composer
+ >>got to terminal and run command
+ composer install
+ 
+. . .once done installation
+ >>open another terminal
+ >>run command
+ npm install
+. . .once done installation
+>>run command
+npm run dev
+
+. . .once running
+copy the .env.example
+rename the copy into .env only..
+edit the environment value for our database.. see our google drive folder > credentials.txt
+
+. . .once done installation
+>>open another terminal
+>>run command
+php artisan serve
+
+>>>if nagiba tayo sa mga config or routes.. I think much better if mag run nalang ng isang
+php artisan optimize:clear
+kesa mag paulit ulit na php artisan:route clear at cache..
+
+go to localhost see if all running with tailwindcss
+
+goodluck to us coding..
+
+all development shoyld be in development branch.. 
+we have 3 branch.. main, develop, and backup
+
+evrey function or component finished.. commit tayo agad..
+
+
+
