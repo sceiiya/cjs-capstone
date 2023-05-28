@@ -23,6 +23,7 @@ return new class extends Migration
             $table->timestamp('archived_at')->nullable();
             $table->string('status')->nullable();
             $table->string('otp')->nullable();
+            $table->string('profile_pic')->nullable();
             $table->string('job_position')->nullable();
             $table->string('job_type')->nullable();
             $table->string('country')->nullable();

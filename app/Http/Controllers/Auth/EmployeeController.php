@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Employee;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EmployeeController extends Controller
 {
@@ -89,5 +90,11 @@ class EmployeeController extends Controller
 
         // Redirect to the index page with success message
         return redirect()->route('employees.index')->with('success', 'Employee deleted successfully');
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('test/google'); // Redirect to the desired page after logout
     }
 }

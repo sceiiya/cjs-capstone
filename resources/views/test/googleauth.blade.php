@@ -40,7 +40,7 @@
             </div>
 
             <!-- Login with Google -->
-            <a href="/google/callback" class="mt-6 flex items-center justify-center">
+            <a href="{{ route('google-auth') }}" class="mt-6 flex items-center justify-center">
               <img src="google-logo.png" alt="Google Logo" class="h-6 w-6 mr-2">
               <span class="text-gray-600 font-bold">Log in with Google</span>
             </a>
@@ -82,6 +82,9 @@
             </a>
           </div>
         </div>
+
+        <a href="{{ route('logout') }}">Logout</a>
+
 
 
         </section>

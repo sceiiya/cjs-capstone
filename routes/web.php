@@ -32,5 +32,8 @@ Route::get('register/google/callback', 'Auth\RegisterController@handleGoogleCall
 Route::get('auth/google', [App\Http\Controllers\Auth\Google::class, 'redirect'])->name('google-auth');
 Route::get('auth/google/call-back', 'App\Http\Controllers\Auth\Google@handleGoogleCallback');
 
+Route::get('user/logout', [App\Http\Controllers\Auth\EmployeeController::class, 'logout'])->name('logout');
+
+
 
 
