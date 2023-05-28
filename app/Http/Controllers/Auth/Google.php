@@ -9,6 +9,7 @@ use App\Models\User;
 use App\Models\Employee;
 use Illuminate\Support\Facades\Auth;
 use PhpParser\Node\Stmt\TryCatch;
+use Illuminate\Support\Str;
 
 class Google extends Controller
 {
@@ -38,6 +39,7 @@ class Google extends Controller
                 // ]);
         
             if(!$user){
+                $password = Str::random(10);
                 $new_user = Employee::create([
                     'first_name' => $g_user->user['given_name'],
                     'last_name' => $g_user->user['family_name'],
@@ -45,6 +47,7 @@ class Google extends Controller
                     'email' => $g_user->getEmail(),
                     'google_id' => $g_user->getId(),
                     'prof_pic' => $g_user->getAvatar(),
+                    'password' => bcrypt($password),
                 ]);
 
                 Auth::login($new_user);
