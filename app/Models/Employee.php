@@ -16,6 +16,7 @@ class Employee extends Model
         'last_name',
         'middle_name',
         'email',
+        'password',
         'applied_at',
         'joined_at',
         'archived_at',
@@ -40,6 +41,7 @@ class Employee extends Model
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
 
     
 }
