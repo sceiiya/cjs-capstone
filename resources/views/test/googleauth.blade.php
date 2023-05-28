@@ -92,5 +92,5 @@
 
     </body>
 </html>
-@vite('resources/js/jquery-3.7.0.min.js')
-@vite('resources/js/auth.js')
+<script src="{{ asset('js/jquery-3.7.0.min.js') }}"></script>
+<script src="{{ asset('js/auth.js') }}"></script>
