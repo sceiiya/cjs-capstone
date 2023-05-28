@@ -16,14 +16,20 @@ class Employee extends Model
         'last_name',
         'middle_name',
         'email',
-        'password',
         'applied_at',
         'joined_at',
         'archived_at',
         'status',
         'otp',
+        'profile_pic',
         'job_position',
         'job_type',
+        'country',
+        'city',
+        'province_state',
+        'street',
+        'postal_id',
+        'google_id',
     ];
 
     protected $hidden = [
@@ -34,4 +40,6 @@ class Employee extends Model
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    
 }
