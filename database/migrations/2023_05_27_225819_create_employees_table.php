@@ -25,6 +25,12 @@ return new class extends Migration
             $table->string('otp')->nullable();
             $table->string('job_position')->nullable();
             $table->string('job_type')->nullable();
+            $table->string('country')->nullable();
+            $table->string('city')->nullable();
+            $table->string('province_state')->nullable();
+            $table->string('street')->nullable();
+            $table->string('postal_id')->nullable();
+            $table->string('google_id')->nullable();
             $table->timestamps();
         });
     }
