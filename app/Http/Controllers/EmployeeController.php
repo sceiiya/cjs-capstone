@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\PointSystem;
 
+
 class EmployeeController extends Controller
 {
     /**
@@ -16,7 +17,9 @@ class EmployeeController extends Controller
     public function index()
     {
         $employees = Employee::all();
-        return view('employees.index', compact('employees'));
+        // return view('employees.index', compact('employees'));
+        return view('test.showemployees', ['employees' => $employees]);
+
     }
 
     public function testcrud()
@@ -35,24 +38,43 @@ class EmployeeController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-    {
+    {   
+
+        $user = Employee::where('email', $request->email)->first();
+
         // Validate the request data
-        $request->validate([
+        $data = $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
+            'middle_name' => 'nullable',
             'email' => 'required',
             'password' => 'required',
+            'job_position' => 'required',
+            'job_type' => 'required',
+            'country' => 'required',
+            'city' => 'required',
+            'province_state' => 'required',
+            'street' => 'required',
+            'postal_id' => 'required|numeric',
             // Add validation rules for other fields
         ]);
-
-        $employee = Employee::create($request->all());
-
+        // $employee = Employee::create($request->all());
+        if(!$user){
+            $employee = Employee::create($data);
         
-        $pointSystem = new PointSystem();
-        $pointSystem->employee_id = $employee->id;
-        $pointSystem->save();
+            $pointSystem = new PointSystem();
+            $pointSystem->employee_id = $employee->id;
+            $pointSystem->save();
+
+            return redirect(route('employee-crud'));
+
+        }elseif ($user) {
+            
+            return redirect(route('employee-crud'))->withError(dd($user));
+
+        }
         // Create a new employee record
-        dd($request);
+        // dd($request);
         // dd(Employee::create($request->all()));
         // return Employee::create($request->all());
 
@@ -60,6 +82,10 @@ class EmployeeController extends Controller
         // return redirect()->route('employees.index')->with('success', 'Employee created successfully');
     }
 
+    public function viewlogin()
+    {
+
+    }
     /**
      * Display the specified resource.
      */

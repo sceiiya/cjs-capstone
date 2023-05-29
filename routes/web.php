@@ -29,15 +29,9 @@ Route::get('test/employee/model', [EmployeeController::class, 'testcrud'])->name
 Route::get('test/employee/model/res', [EmployeeController::class, 'testcrud'])->name('employees.index');
 Route::post('test/employee/model/register', [EmployeeController::class, 'store'])->name('employees.store');
 Route::get('test/employee/model/update', [EmployeeController::class, 'update'])->name('employees.update');
+Route::get('test/employee/model/login', [EmployeeController::class, 'viewlogin'])->name('employees.test.login');
+Route::get('test/employee/model/show', [EmployeeController::class, 'index'])->name('employees.test.show');
 
-
-// Google login
-// Route::get('login/google', 'Auth\LoginController@redirectToGoogle')->name('google.login');
-// Route::get('login/google/callback', 'Auth\LoginController@handleGoogleCallback');
-
-// // Google registration
-// Route::get('register/google', 'Auth\RegisterController@redirectToGoogle')->name('google.register');
-// Route::get('register/google/callback', 'Auth\RegisterController@handleGoogleCallback');
 // Googgle Auth Callback
 Route::get('auth/google', [App\Http\Controllers\Auth\Google::class, 'redirect'])->name('google-auth');
 Route::get('auth/google/call-back', 'App\Http\Controllers\Auth\Google@handleGoogleCallback');

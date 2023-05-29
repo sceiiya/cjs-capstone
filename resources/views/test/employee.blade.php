@@ -20,13 +20,22 @@
 
         <!-- Create Employee Form -->
         <form class="flex flex-col" id="createEmployeeForm" method="POST" action="{{ route('employees.store') }}">
+            @if($errors->any())
+                <ul>
+                    @foreach($errors->all() as $error)
+                        <li class="">
+                        {{$error}}
+                        </li>
+                    @endforeach
+                </ul>
+            @endif
         <!-- <form class="flex flex-col" id="createEmployeeForm" method="POST" action="{{ route('employees.store') }}"> -->
             @csrf
             @method('post')
             <!-- Form fields -->
             <input type="text" name="first_name" placeholder="First Name" required>
             <input type="text" name="last_name" placeholder="Last Name" required>
-            <input type="text" name="middle_name" placeholder="Last Name">
+            <input type="text" name="middle_name" placeholder="Middle Name">
             
             <label for="job_type">Job Type</label>
             <select name="job_type" required>
@@ -55,7 +64,7 @@
             <input type="text" name="province_state" placeholder="Province/State" required>
             <input type="text" name="city" placeholder="City" required>
             <input type="text" name="street" placeholder="House#./Building Name/Street" required>
-            <input type="number" name="postal_id" placeholder="Postal Code" required>
+            <input type="decimal" name="postal_id" placeholder="Postal Code" required>
 
             <!-- Add other fields as needed -->
 
