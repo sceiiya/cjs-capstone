@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\PointSystem;
 
 class EmployeeController extends Controller
 {
@@ -18,13 +19,17 @@ class EmployeeController extends Controller
         return view('employees.index', compact('employees'));
     }
 
+    public function testcrud()
+    {
+        return view('test.employee');
+    }
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
-    {
-        // return view('employees.create');
-    }
+    // public function create()
+    // {
+    //     // return view('employees.create');
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -35,14 +40,24 @@ class EmployeeController extends Controller
         $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
+            'email' => 'required',
+            'password' => 'required',
             // Add validation rules for other fields
         ]);
 
+        $employee = Employee::create($request->all());
+
+        
+        $pointSystem = new PointSystem();
+        $pointSystem->employee_id = $employee->id;
+        $pointSystem->save();
         // Create a new employee record
-        Employee::create($request->all());
+        dd($request);
+        // dd(Employee::create($request->all()));
+        // return Employee::create($request->all());
 
         // Redirect to the index page with success message
-        return redirect()->route('employees.index')->with('success', 'Employee created successfully');
+        // return redirect()->route('employees.index')->with('success', 'Employee created successfully');
     }
 
     /**
@@ -56,10 +71,10 @@ class EmployeeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Employee $employee)
-    {
-        return view('employees.edit', compact('employee'));
-    }
+    // public function edit(Employee $employee)
+    // {
+    //     return view('employees.edit', compact('employee'));
+    // }
 
     /**
      * Update the specified resource in storage.

@@ -11,6 +11,7 @@ use App\Models\Employee;
 use Illuminate\Support\Facades\Auth;
 use PhpParser\Node\Stmt\TryCatch;
 use Illuminate\Support\Str;
+use App\Models\PointSystem;
 
 class Google extends Controller
 {
@@ -32,7 +33,7 @@ class Google extends Controller
                 // $nname = $g_user->getName();
                 // $nnemail = $g_user->getEmail();
                 // $nnid = $g_user->getId();
-                echo '<br/>token: '.$token.'<br/>reftoken: '.$refreshToken.'<br/>expires: '.$expiresIn.'name: '.$g_user->getName().'<br/>first name: '.$g_user->user['given_name'].'<br/>last name: '.$g_user->user['family_name'].'<br/>email: '.$g_user->getEmail().'<br/>gug ID: '.$g_user->getId().'<br/>avatar: '.$g_user->getAvatar().'<br/>nickname: '.$g_user->getNickname();
+                echo '<br/>token: '.$token.'<br/>reftoken: '.$refreshToken.'<br/>expires: '.$expiresIn.'<br/>name: '.$g_user->getName().'<br/>first name: '.$g_user->user['given_name'].'<br/>last name: '.$g_user->user['family_name'].'<br/>email: '.$g_user->getEmail().'<br/>gug ID: '.$g_user->getId().'<br/>avatar: '.$g_user->getAvatar().'<br/>nickname: '.$g_user->getNickname();
         
                 // print_r([
                 //     'name' => $g_user->getName(),
@@ -54,7 +55,14 @@ class Google extends Controller
                     'profile_pic' => $g_user->getAvatar(),
                     'password' => bcrypt($password),
                     'status' => 'verified',
+                    
+                    // Create a new record in the point_system table
                 ]);
+
+                // $pointSystem = new PointSystem();
+                // $pointSystem->employee_id = $employee->id;
+                // $pointSystem->save();
+                $new_user->PointSystem()->create();
 
                 Auth::login($new_user);
 
