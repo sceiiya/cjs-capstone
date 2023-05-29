@@ -22,7 +22,7 @@ class Google extends Controller
         try {
             $g_user = Socialite::driver('google')->user();
 
-            $user = User::where('google_id', $g_user->getId())->first();
+            $user = Employee::where('google_id', $g_user->getId())->first();
         
                 // $nname = $g_user->getName();
                 // $nnemail = $g_user->getEmail();
@@ -40,7 +40,7 @@ class Google extends Controller
         
             if(!$user){
                 $password = Str::random(10);
-                $new_user = User::create([
+                $new_user = Employee::create([
                     'first_name' => $g_user->user['given_name'],
                     'last_name' => $g_user->user['family_name'],
                     'email' => $g_user->getEmail(),
