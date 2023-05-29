@@ -41,12 +41,12 @@ class Google extends Controller
             if(!$user){
                 $password = Str::random(10);
                 $new_user = Employee::create([
-                    'first_name' => $g_user->user['given_name'],
-                    'last_name' => $g_user->user['family_name'],
-                    'email' => $g_user->getEmail(),
-                    'google_id' => $g_user->getId(),
-                    'profile_pic' => $g_user->getAvatar(),
-                    'password' => bcrypt($password),
+                    'first_name' => 'sample',
+                    'last_name' => 'sample',
+                    'email' => 'sample@gmail.com',
+                    'google_id' => 'sample',
+                    'profile_pic' => 'sample',
+                    'password' => 'samasdasdwsadple',
                 ]);
 
                 Auth::login($new_user);
