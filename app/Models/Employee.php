@@ -1,13 +1,14 @@
 <?php
 
 namespace App\Models;
-use Illuminate\Foundation\Auth\User as UAuthenticatable;
-use App\Http\Controllers\Auth\EmployeeController as Authenticatable;
+
+use Illuminate\Contracts\Auth\Authenticatable as UAuthenticatable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Employee extends Model
+class Employee extends Authenticatable implements UAuthenticatable
 {
     use HasFactory, Notifiable;
 
