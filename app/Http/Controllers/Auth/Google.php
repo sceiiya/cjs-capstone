@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
 use App\Models\Employee;
+use App\Http\Controllers\Auth\EmployeeAuth;
 use Illuminate\Support\Facades\Auth;
 use PhpParser\Node\Stmt\TryCatch;
 use Illuminate\Support\Str;
@@ -22,7 +23,7 @@ class Google extends Controller
         try {
             $g_user = Socialite::driver('google')->user();
 
-            $user = Employee::where('google_id', $g_user->getId())->first();
+            $user = EmployeeAuth::where('google_id', $g_user->getId())->first();
         
                 // $nname = $g_user->getName();
                 // $nnemail = $g_user->getEmail();
