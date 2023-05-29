@@ -94,7 +94,7 @@ class EmployeeController extends Controller
 
     public function logout()
     {
-        Auth::logout();
+        return Auth::logout();
         // return redirect('test/google'); // Redirect to the desired page after logout
     }
 }
