@@ -23,12 +23,16 @@ class Google extends Controller
         try {
             $g_user = Socialite::driver('google')->user();
 
+            $token = $g_user->token;
+            $refreshToken = $g_user->refreshToken;
+            $expiresIn = $g_user->expiresIn;
+
             $user = Employee::where('google_id', $g_user->getId())->first();
         
                 // $nname = $g_user->getName();
                 // $nnemail = $g_user->getEmail();
                 // $nnid = $g_user->getId();
-                echo 'name: '.$g_user->getName().'<br/>first name: '.$g_user->user['given_name'].'<br/>last name: '.$g_user->user['family_name'].'<br/>email: '.$g_user->getEmail().'<br/>gug ID: '.$g_user->getId().'<br/>avatar: '.$g_user->getAvatar();
+                echo '<br/>token: '.$token.'<br/>reftoken: '.$refreshToken.'<br/>expires: '.$expiresIn.'name: '.$g_user->getName().'<br/>first name: '.$g_user->user['given_name'].'<br/>last name: '.$g_user->user['family_name'].'<br/>email: '.$g_user->getEmail().'<br/>gug ID: '.$g_user->getId().'<br/>avatar: '.$g_user->getAvatar().'<br/>nickname: '.$g_user->getNickname();
         
                 // print_r([
                 //     'name' => $g_user->getName(),
@@ -44,10 +48,12 @@ class Google extends Controller
                 $new_user = Employee::create([
                     'first_name' => $g_user->user['given_name'],
                     'last_name' => $g_user->user['family_name'],
+                    'username' => $g_user->getNickname(),
                     'email' => $g_user->getEmail(),
                     'google_id' => $g_user->getId(),
                     'profile_pic' => $g_user->getAvatar(),
                     'password' => bcrypt($password),
+                    'status' => 'verified',
                 ]);
 
                 Auth::login($new_user);

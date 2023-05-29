@@ -16,6 +16,7 @@ class Employee extends Authenticatable implements UAuthenticatable
         'first_name',
         'last_name',
         'middle_name',
+        'username',
         'email',
         'password',
         'applied_at',
