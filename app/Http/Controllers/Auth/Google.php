@@ -59,10 +59,9 @@ class Google extends Controller
                     // Create a new record in the point_system table
                 ]);
 
-                // $pointSystem = new PointSystem();
-                // $pointSystem->employee_id = $employee->id;
-                // $pointSystem->save();
-                $new_user->PointSystem()->create();
+                $pointSystem = new PointSystem();
+                $pointSystem->employee_id = $new_user->id;
+                $pointSystem->save();
 
                 Auth::login($new_user);
 
