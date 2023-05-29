@@ -14,7 +14,7 @@ use Illuminate\Support\Str;
 class Google extends Controller
 {
     public function redirect(){
-    return Socialite::driver('google')->redirect();
+        return Socialite::driver('google')->redirect();
     }
 
     public function handleGoogleCallback(){
@@ -40,13 +40,13 @@ class Google extends Controller
         
             if(!$user){
                 $password = Str::random(10);
-                $new_user = Employee::create([
+                $new_user = User::create([
                     'first_name' => $g_user->user['given_name'],
                     'last_name' => $g_user->user['family_name'],
                     'name' => $g_user->getName(),
                     'email' => $g_user->getEmail(),
                     'google_id' => $g_user->getId(),
-                    'prof_pic' => $g_user->getAvatar(),
+                    'profile_pic' => $g_user->getAvatar(),
                     'password' => bcrypt($password),
                 ]);
 

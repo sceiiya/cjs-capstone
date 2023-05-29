@@ -23,7 +23,7 @@ class EmployeeController extends Controller
      */
     public function create()
     {
-        return view('employees.create');
+        // return view('employees.create');
     }
 
     /**
@@ -95,6 +95,6 @@ class EmployeeController extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect('test/google'); // Redirect to the desired page after logout
+        // return redirect('test/google'); // Redirect to the desired page after logout
     }
 }
