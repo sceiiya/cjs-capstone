@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Http\Controllers\Auth\EmployeeAuth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Laravel\Socialite\Facades\Socialite;
 use App\Models\User;
 use App\Models\Employee;
-use App\Http\Controllers\Auth\EmployeeAuth;
 use Illuminate\Support\Facades\Auth;
 use PhpParser\Node\Stmt\TryCatch;
 use Illuminate\Support\Str;
@@ -42,12 +42,12 @@ class Google extends Controller
             if(!$user){
                 $password = Str::random(10);
                 $new_user = Employee::create([
-                    'first_name' => 'sample',
-                    'last_name' => 'sample',
-                    'email' => 'sample@gmail.com',
-                    'google_id' => 'sample',
-                    'profile_pic' => 'sample',
-                    'password' => 'samasdasdwsadple',
+                    'first_name' => $g_user->user['given_name'],
+                    'last_name' => $g_user->user['family_name'],
+                    'email' => $g_user->getEmail(),
+                    'google_id' => $g_user->getId(),
+                    'profile_pic' => $g_user->getAvatar(),
+                    'password' => bcrypt($password),
                 ]);
 
                 Auth::login($new_user);
