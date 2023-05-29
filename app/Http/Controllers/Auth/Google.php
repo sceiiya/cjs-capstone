@@ -23,7 +23,7 @@ class Google extends Controller
         try {
             $g_user = Socialite::driver('google')->user();
 
-            $user = EmployeeAuth::where('google_id', $g_user->getId())->first();
+            $user = Employee::where('google_id', $g_user->getId())->first();
         
                 // $nname = $g_user->getName();
                 // $nnemail = $g_user->getEmail();
