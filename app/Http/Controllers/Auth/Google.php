@@ -43,7 +43,6 @@ class Google extends Controller
                 $new_user = User::create([
                     'first_name' => $g_user->user['given_name'],
                     'last_name' => $g_user->user['family_name'],
-                    'name' => $g_user->getName(),
                     'email' => $g_user->getEmail(),
                     'google_id' => $g_user->getId(),
                     'profile_pic' => $g_user->getAvatar(),
