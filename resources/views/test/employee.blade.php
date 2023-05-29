@@ -105,4 +105,3 @@
 
     </body>
 </html>
-@vite(['resources/js/jquery.js', 'resources/js/auth.js'])
