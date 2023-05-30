@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\ViewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,7 +31,10 @@ Route::get('test/employee/model/res', [EmployeeController::class, 'testcrud'])->
 Route::post('test/employee/model/register', [EmployeeController::class, 'store'])->name('employees.store');
 Route::get('test/employee/model/update', [EmployeeController::class, 'update'])->name('employees.update');
 Route::get('test/employee/model/login', [EmployeeController::class, 'viewlogin'])->name('employees.test.login');
-Route::get('test/employee/model/show', [EmployeeController::class, 'index'])->name('employees.test.show');
+Route::get('test/employee/model/show', [ViewController::class, 'showemployee'])->name('employees.test.show');
+// Route::get('test/employee/model/show/edit', [ViewController::class, 'employeeedit'])->name('employees.test.show.edit');
+Route::get('test/employee/model/{employee}/edit', [ViewController::class, 'employeeedit'])->name('employee.edit');
+Route::get('test/employee/model/{employee}/delete', [EmployeeController::class, 'delete'])->name('employee.delete');
 
 // Googgle Auth Callback
 Route::get('auth/google', [App\Http\Controllers\Auth\Google::class, 'redirect'])->name('google-auth');

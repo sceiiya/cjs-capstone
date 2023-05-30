@@ -4,11 +4,28 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\DataModel;
+use App\Models\EmployeeModel;
+
 class ViewController extends Controller
 {
-    public function docu(DataModel $mData){
-        $mParam['title'] = 'First Read';
-        $mParam['data'] = $mData->methodba();
-        return view('layouts.dashvv', $mParam);
+    public function showemployee(EmployeeModel $mData){
+        // $employees = EmployeeModel::all();
+        // return view('employees.index', compact('employees'));
+        // return view('test.showemployees', ['employees' => $employees]);
+
+        $mParam['title'] = 'All Employees';
+        $mParam['employees'] = $mData->all();
+        return view('test.employee', $mParam);
+    }
+
+    public function employeeedit(EmployeeModel $employee){
+        // $employees = EmployeeModel::all();
+        // return view('employees.index', compact('employees'));
+        // return view('test.showemployees', ['employees' => $employees]);
+
+        $mParam['title'] = 'Edit Employees';
+        $mParam['editemployee'] = $employee;
+        // return $employee;
+        return view('test.employee', $mParam);
     }
 }

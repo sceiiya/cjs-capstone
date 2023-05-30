@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Employee;
+use App\Models\EmployeeModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\PointSystem;
+use Illuminate\Support\Facades\Hash;
 
 
 class EmployeeController extends Controller
@@ -39,8 +41,7 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {   
-
-        $user = Employee::where('email', $request->email)->first();
+        $user = EmployeeModel::where('email', $request->email)->first();
 
         // Validate the request data
         $data = $request->validate([
@@ -58,19 +59,25 @@ class EmployeeController extends Controller
             'postal_id' => 'required|numeric',
             // Add validation rules for other fields
         ]);
+        
         // $employee = Employee::create($request->all());
         if(!$user){
-            $employee = Employee::create($data);
+
+            $data['password'] = Hash::make($data['password']);
+            // $data['password'] = bcrypt($data['password']);
+
+            $employee = EmployeeModel::create($data);
         
             $pointSystem = new PointSystem();
             $pointSystem->employee_id = $employee->id;
             $pointSystem->save();
+            return($employee);
 
-            return redirect(route('employee-crud'));
+            // return redirect(route('employee-crud'));
 
         }elseif ($user) {
             
-            return redirect(route('employee-crud'))->withError(dd($user));
+            // return redirect(route('employee-crud'))->withError(dd($user));
 
         }
         // Create a new employee record
@@ -97,10 +104,12 @@ class EmployeeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    // public function edit(Employee $employee)
-    // {
-    //     return view('employees.edit', compact('employee'));
-    // }
+    public function edit(EmployeeModel $employee)
+    {
+        // return view('');
+        dd($employee);
+        // return view('employees.edit', compact('employee'));
+    }
 
     /**
      * Update the specified resource in storage.

@@ -66,9 +66,10 @@ class Google extends Controller
                 Auth::login($new_user);
 
                 // return redirect()->intended('/');
+                return view('test.googleauth', ['logmsg' => 'Already have account therefore you shoud be logged in rn']);
             }else{
                 Auth::login($user);
-                // return redirect()->intended('/');
+                return redirect()->intended('/');
             }
         } catch (\Throwable $th) {
             dd('Something went wrong! '.$th->getMessage());
