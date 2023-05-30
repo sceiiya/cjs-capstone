@@ -18,9 +18,6 @@
         
         @if(!empty($logmsg))
         <h1>{{$logmsg}}</h1>
-        <div class="m-3 p-3">
-          {{$UZER}}
-        </div>
         @endif
 
         <div class="modal w-4/6 rounded-lg m-1 border border-x-slate-500 p-3">

@@ -34,7 +34,7 @@ class Google extends Controller
                 // $nnemail = $g_user->getEmail();
                 // $nnid = $g_user->getId();
                 // $UZER =  `<br/>token: $token<br/>reftoken: $refreshToken<br/>expires: $expiresIn<br/>name: $g_user->getName()<br/>first name: $g_user->user['given_name']<br/>last name: $g_user->user['family_name']<br/>email: $g_user->getEmail()<br/>gug ID: $g_user->getId()<br/>avatar: $g_user->getAvatar()<br/>nickname: $g_user->getNickname()`;
-                $UZER =  '<br/>token: '.$token.'<br/>reftoken: '.$refreshToken.'<br/>expires: '.$expiresIn.'<br/>name: '.$g_user->getName().'<br/>first name: '.$g_user->user["given_name"].'<br/>last name: '.$g_user->user["family_name"].'<br/>email: '.$g_user->getEmail().'<br/>gug ID: '.$g_user->getId().'<br/>avatar: '.$g_user->getAvatar().'<br/>nickname: '.$g_user->getNickname();
+                 echo  '<br/>token: '.$token.'<br/>reftoken: '.$refreshToken.'<br/>expires: '.$expiresIn.'<br/>name: '.$g_user->getName().'<br/>first name: '.$g_user->user["given_name"].'<br/>last name: '.$g_user->user["family_name"].'<br/>email: '.$g_user->getEmail().'<br/>gug ID: '.$g_user->getId().'<br/>avatar: '.$g_user->getAvatar().'<br/>nickname: '.$g_user->getNickname();
 
                 // print_r([
                 //     'name' => $g_user->getName(),
@@ -68,11 +68,9 @@ class Google extends Controller
 
                 // return redirect()->intended('/');
                 $mParam['logmsg'] = 'You are a new user who just created an account trough Google Auth';
-                $mParam['UZER'] = $UZER;
                 return view('test.googleauth', $mParam);
             }else{
                 Auth::login($user);
-                $mParam['UZER'] = $UZER;
                 $mParam['logmsg'] = 'Already have account therefore you shoud be logged in rn';
                 return view('test.googleauth', $mParam);
 
