@@ -14,45 +14,46 @@
         </h1>
         <!-- ---------------============== playground ==============--------------- -->
         <section class="flex flex-col justify-center p-3 ml-5">
-
+        <div>
+        @if(session()->has('success'))
+            {{session('success')}}
+        @endif
+        </div>
         <!-- Employee Table -->
         <div id="employeeTable">
 
-            <table class="table-auto" border="1">
+            <table class="table-auto table">
                 <tr>
-                    <th>'first_name'</th>
-                    <th>'last_name'</th>
-                    <th>'middle_name'</th>
-                    <th>'username'</th>
-                    <th>'email'</th>
-                    <th>'password'</th>
-                    <th>'applied_at'</th>
-                    <th>'joined_at'</th>
-                    <th>'archived_at'</th>
-                    <th>'status'</th>
-                    <th>'otp'</th>
-                    <th>'profile_pic'</th>
-                    <th>'job_position'</th>
-                    <th>'job_type'</th>
-                    <th>'country'</th>
-                    <th>'city'</th>
-                    <th>'province_state'</th>
-                    <th>'street'</th>
-                    <th>'postal_id'</th>
-                    <th>'google_id'</th>
+                    <th>first_name</th>
+                    <th>last_name</th>
+                    <th>middle_name</th>
+                    <th>username</th>
+                    <th>email</th>
+                    <th>applied_at</th>
+                    <th>joined_at</th>
+                    <th>archived_at</th>
+                    <th>status</th>
+                    <th>otp</th>
+                    <th>profile_pic</th>
+                    <th>job_position</th>
+                    <th>job_type</th>
+                    <th>country</th>
+                    <th>city</th>
+                    <th>province_state</th>
+                    <th>street</th>
+                    <th>postal_id</th>
+                    <th>google_id</th>
                     <th>Edit<th>
                     <th>Delete</th>
                 </tr>
                     @if(!empty($employees))
                     @foreach($employees as $employee)
                         <tr>   
-                            <td> {{$employee->id}} </td>
                             <td> {{$employee->first_name}} </td>
                             <td> {{$employee->last_name}} </td>
                             <td> {{$employee->middle_name}} </td>
                             <td> {{$employee->username}} </td>
                             <td> {{$employee->email}} </td>
-                            <td> {{$employee->password}} </td>
                             <td> {{$employee->applied_at}} </td>
                             <td> {{$employee->joined_at}} </td>
                             <td> {{$employee->archived_at}} </td>
@@ -68,7 +69,14 @@
                             <td> {{$employee->postal_id}} </td>
                             <td> {{$employee->google_id}} </td>
                             <td><a href="{{route('employee.edit', [ 'employee' => $employee ])}}">Edit</a></td>
-                            <td><a href="{{route('employee.delete', [ 'employee' => $employee ])}}">Delete</a></td>
+                            <td>
+    <form action="{{ route('employee.delete', ['employee' => $employee]) }}" method="POST">
+        @csrf
+        @method('PUT')
+        <button type="submit">Delete</button>
+    </form>
+</td>
+
                         </tr>
                         @endforeach
                         @endif
@@ -95,7 +103,8 @@
             <input type="text" name="first_name" placeholder="First Name" required>
             <input type="text" name="last_name" placeholder="Last Name" required>
             <input type="text" name="middle_name" placeholder="Middle Name">
-            
+            <input type="text" name="username" placeholder="Username" required>
+
             <label for="job_type">Job Type</label>
             <select name="job_type" required>
                 <option value="" disabled selected>Select Time</option>
@@ -123,7 +132,7 @@
             <input type="text" name="province_state" placeholder="Province/State" required>
             <input type="text" name="city" placeholder="City" required>
             <input type="text" name="street" placeholder="House#./Building Name/Street" required>
-            <input type="decimal" name="postal_id" placeholder="Postal Code" required>
+            <input type="number" name="postal_id" placeholder="Postal Code" required>
 
             <!-- Add other fields as needed -->
 
@@ -133,15 +142,16 @@
         @endif
 
         @if(!empty($editemployee))
-        <form class="flex flex-col" id="createEmployeeForm" method="POST" action="">
+        <form class="flex flex-col" id="updateEmployeeForm" method="POST" action="{{ route('employee.update', [ 'employee' => $editemployee]) }}">
         <!-- <form class="flex flex-col" id="createEmployeeForm" method="POST" action="{{ route('employees.store') }}"> -->
             @csrf
-            @method('post')
+            @method('put')
             <!-- Form fields -->
-            <input type="text" name="id" placeholder="id" value="{{$editemployee->id}}" required>
+            <!-- <input type="text" name="id" placeholder="id" value="{{$editemployee->id}}" required> -->
             <input type="text" name="first_name" placeholder="First Name" value="{{$editemployee->first_name}}" required>
             <input type="text" name="last_name" placeholder="Last Name" value="{{$editemployee->last_name}}" required>
             <input type="text" name="middle_name" placeholder="Middle Name" value="{{$editemployee->middle_name}}">
+            <input type="text" name="username" placeholder="Username" value="{{$editemployee->username}}">
 
             <label for="job_type">Job Type</label>
             <select name="job_type" required>
@@ -170,7 +180,7 @@
             <input type="text" name="province_state" placeholder="Province/State" value="{{$editemployee->province_state}}" required>
             <input type="text" name="city" placeholder="City" value="{{$editemployee->city}}" required>
             <input type="text" name="street" placeholder="House#./Building Name/Street" value="{{$editemployee->street}}" required>
-            <input type="decimal" name="postal_id" placeholder="Postal Code" value="{{$editemployee->postal_id}}" required>
+            <input type="number" name="postal_id" placeholder="Postal Code" value="{{$editemployee->postal_id}}" required>
 
             <!-- Add other fields as needed -->
 

@@ -34,7 +34,11 @@ Route::get('test/employee/model/login', [EmployeeController::class, 'viewlogin']
 Route::get('test/employee/model/show', [ViewController::class, 'showemployee'])->name('employees.test.show');
 // Route::get('test/employee/model/show/edit', [ViewController::class, 'employeeedit'])->name('employees.test.show.edit');
 Route::get('test/employee/model/{employee}/edit', [ViewController::class, 'employeeedit'])->name('employee.edit');
-Route::get('test/employee/model/{employee}/delete', [EmployeeController::class, 'delete'])->name('employee.delete');
+Route::put('test/employee/model/{employee}/update', [EmployeeController::class, 'update'])->name('employee.update');
+// Route::delete('test/employee/model/{employee}/delete', [EmployeeController::class, 'destroy'])->name('employee.delete');
+Route::put('test/employee/model/{employee}/delete', [EmployeeController::class, 'archive'])->name('employee.delete');
+
+// Route::get('test/employee/model/{employee}/delete', [EmployeeController::class, 'delete'])->name('employee.delete');
 
 // Googgle Auth Callback
 Route::get('auth/google', [App\Http\Controllers\Auth\Google::class, 'redirect'])->name('google-auth');
@@ -45,3 +49,7 @@ Route::get('user/logout', [App\Http\Controllers\EmployeeController::class, 'logo
 
 
 
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

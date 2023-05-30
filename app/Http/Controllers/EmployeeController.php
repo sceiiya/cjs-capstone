@@ -8,6 +8,7 @@ use App\Models\EmployeeModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\PointSystem;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 
 
@@ -19,6 +20,7 @@ class EmployeeController extends Controller
     public function index()
     {
         $employees = Employee::all();
+        // $employees = Employee::whereNull('archived_at')->get();
         // return view('employees.index', compact('employees'));
         return view('test.showemployees', ['employees' => $employees]);
 
@@ -48,6 +50,7 @@ class EmployeeController extends Controller
             'first_name' => 'required',
             'last_name' => 'required',
             'middle_name' => 'nullable',
+            'username' => 'required',
             'email' => 'required',
             'password' => 'required',
             'job_position' => 'required',
@@ -71,12 +74,14 @@ class EmployeeController extends Controller
             $pointSystem = new PointSystem();
             $pointSystem->employee_id = $employee->id;
             $pointSystem->save();
-            return($employee);
+
+            return redirect()->route('employees.test.show')->with('success', 'Employee registered successfully');
 
             // return redirect(route('employee-crud'));
 
         }elseif ($user) {
             
+            return redirect()->route('employees.test.show')->with('success', 'You already have an account, Please Login!');
             // return redirect(route('employee-crud'))->withError(dd($user));
 
         }
@@ -114,32 +119,48 @@ class EmployeeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Employee $employee)
+    public function update(Request $request, EmployeeModel $employee)
     {
         // Validate the request data
-        $request->validate([
+        $data = $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
+            'middle_name' => 'nullable',
+            'username' => 'required',
+            'email' => 'required',
+            'password' => 'required',
+            'job_position' => 'required',
+            'job_type' => 'required',
+            'country' => 'required',
+            'city' => 'required',
+            'province_state' => 'required',
+            'street' => 'required',
+            'postal_id' => 'required|numeric',
             // Add validation rules for other fields
         ]);
 
+        $employee->update($data);
         // Update the employee record
-        $employee->update($request->all());
-
+        // $employee->update($request->all());
+        // return ($employee);
         // Redirect to the index page with success message
-        return redirect()->route('employees.index')->with('success', 'Employee updated successfully');
+        return redirect()->route('employees.test.show')->with('success', 'Employee updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Employee $employee)
+    public function archive(EmployeeModel $employee)
     {
         // Delete the employee record
-        $employee->delete();
-
+        $data = [
+            'archived_at' => date("Y-m-d H:i:s"),
+            'status' => 'archived',
+        ];
+        $employee->update($data);
+        PointSystem::where('employee_id', $employee->id)->update(['status' => 'inactive']);
         // Redirect to the index page with success message
-        return redirect()->route('employees.index')->with('success', 'Employee deleted successfully');
+        return redirect()->route('employees.test.show')->with('success', 'Employee deleted successfully');
     }
 
     public function logout()
