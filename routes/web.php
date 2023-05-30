@@ -21,7 +21,7 @@ Route::get('/', function () {
 
 Route::get('test/google', function () {
     return view('test.googleauth');
-});
+})->name('testt.google');
 
 // Route::get('test/employee/model', function () {
 //     return view('test.employee');
