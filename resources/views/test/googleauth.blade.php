@@ -17,7 +17,7 @@
         <!-- Login Modal -->
         <h1>
           @if(!empty($logmsg))
-            {{$$logmsg}}
+            {{$logmsg}}
           @endif
         </h1>
         <div class="modal w-4/6 rounded-lg m-1 border border-x-slate-500 p-3">
