@@ -15,11 +15,14 @@
         <section class="flex flex-col justify-center p-3">
 
         <!-- Login Modal -->
-        <h1>
-          @if(!empty($logmsg))
-            {{$logmsg}}
-          @endif
-        </h1>
+        
+        @if(!empty($logmsg))
+        <h1>{{$logmsg}}</h1>
+        <div class="m-3 p-3">
+          {{$UZER}}
+        </div>
+        @endif
+
         <div class="modal w-4/6 rounded-lg m-1 border border-x-slate-500 p-3">
           <div class="modal-content flex-col items-center justify-center">
             <!-- Login Form -->
