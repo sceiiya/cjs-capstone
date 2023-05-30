@@ -67,13 +67,13 @@ class Google extends Controller
                 Auth::login($new_user);
 
                 $mParam['logmsg'] = 'You are a new user who just created an account trough Google Auth';
-                return redirect()->intended('test/google')->with($mParam);
-                // return view('test.googleauth', $mParam);
+                // return redirect()->intended('test/google')->with($mParam);
+                return view('test.googleauth', $mParam);
             }else{
                 Auth::login($user);
                 $mParam['logmsg'] = 'Already have account therefore you shoud be logged in rn';
-                // return view('test.googleauth', $mParam);
-                return redirect()->intended('test/google')->with($mParam);
+                return view('test.googleauth', $mParam);
+                // return redirect()->intended('test/google')->with($mParam);
 
                 // return redirect()->intended('/');
             }
