@@ -2,7 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\PointSystemController;
 use App\Http\Controllers\ViewController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,10 +48,15 @@ Route::get('auth/google/call-back', 'App\Http\Controllers\Auth\Google@handleGoog
 
 Route::get('user/logout', [App\Http\Controllers\EmployeeController::class, 'logout'])->name('logout');
 
-
-
-
-
+//auths
 Auth::routes();
-
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+
+//points routes
+Route::get('test/points/model/display', [PointSystemController::class, 'index'])->name('display-points');
+
+Route::get('test/points/model/{employeeID}/show', [PointSystemController::class, 'show'])->name('show-points');
+Route::put('test/points/model/{employeeID}/{in_add}/{csrf}/increment', [PointSystemController::class, 'increment'])->name('increment-points');
+Route::put('test/points/model/{employeeID}/convert', [PointSystemController::class, 'convert'])->name('convert-points');

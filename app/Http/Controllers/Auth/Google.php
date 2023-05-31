@@ -11,7 +11,7 @@ use App\Models\Employee;
 use Illuminate\Support\Facades\Auth;
 use PhpParser\Node\Stmt\TryCatch;
 use Illuminate\Support\Str;
-use App\Models\PointSystem;
+use App\Models\PointsModel;
 
 class Google extends Controller
 {
@@ -60,9 +60,9 @@ class Google extends Controller
                     // Create a new record in the point_system table
                 ]);
 
-                $pointSystem = new PointSystem();
-                $pointSystem->employee_id = $new_user->id;
-                $pointSystem->save();
+                $PointsModel = new PointsModel();
+                $PointsModel->employee_id = $new_user->id;
+                $PointsModel->save();
 
                 Auth::login($new_user);
 

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PointSystem extends Model
+class PointsModel extends Model
 {
     use HasFactory;
     protected $table ='point_system';
@@ -15,5 +15,6 @@ class PointSystem extends Model
         'total_points',
         'unused_points',
         'converted_at',
+        'converted_points',
     ];
 }

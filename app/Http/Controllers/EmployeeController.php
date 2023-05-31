@@ -7,7 +7,7 @@ use App\Models\Employee;
 use App\Models\EmployeeModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\PointSystem;
+use App\Models\PointsModel;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Hash;
 
@@ -71,9 +71,9 @@ class EmployeeController extends Controller
 
             $employee = EmployeeModel::create($data);
         
-            $pointSystem = new PointSystem();
-            $pointSystem->employee_id = $employee->id;
-            $pointSystem->save();
+            $PointsModel = new PointsModel();
+            $PointsModel->employee_id = $employee->id;
+            $PointsModel->save();
 
             return redirect()->route('employees.test.show')->with('success', 'Employee registered successfully');
 
@@ -158,7 +158,7 @@ class EmployeeController extends Controller
             'status' => 'archived',
         ];
         $employee->update($data);
-        PointSystem::where('employee_id', $employee->id)->update(['status' => 'inactive']);
+        PointsModel::where('employee_id', $employee->id)->update(['status' => 'inactive']);
         // Redirect to the index page with success message
         return redirect()->route('employees.test.show')->with('success', 'Employee deleted successfully');
     }
