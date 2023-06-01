@@ -36,3 +36,29 @@
 //         });
 //     });
 // })
+
+fetch('https://restcountries.com/v3.1/all')
+  .then(response => response.json())
+  .then(data => {
+    const commonNames = {};
+    
+    data.forEach(country => {
+      const countryCode = country.cca3;
+      const commonName = country.name.common;
+      commonNames[countryCode] = commonName;
+    });
+    const sortedCommonNames = Object.values(commonNames).sort();
+    
+    sortedCommonNames.forEach(commonName => {
+      console.log('\n'+commonName);
+    });
+  })
+  .catch(error => {
+    console.error('Error:', error);
+  });
+
+
+
+
+
+

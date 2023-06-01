@@ -22,6 +22,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/zzz', function () {
+    return view('zzz');
+});
+
 Route::get('test/google', function () {
     return view('test.googleauth');
 })->name('testt.google');
