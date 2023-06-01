@@ -13,7 +13,7 @@ use PhpParser\Node\Stmt\TryCatch;
 use Illuminate\Support\Str;
 use App\Models\PointsModel;
 
-class Google extends Controller
+class GoogleController extends Controller
 {
     public function redirect(){
         return Socialite::driver('google')->redirect();
@@ -28,7 +28,7 @@ class Google extends Controller
             $refreshToken = $g_user->refreshToken;
             $expiresIn = $g_user->expiresIn;
 
-            $user = Employee::where('google_id', $g_user->getId())->first();
+            $user = User::where('google_id', $g_user->getId())->first();
         
                 // $nname = $g_user->getName();
                 // $nnemail = $g_user->getEmail();
@@ -47,7 +47,7 @@ class Google extends Controller
         
             if(!$user){
                 $password = Str::random(10);
-                $new_user = Employee::create([
+                $new_user = User::create([
                     'first_name' => $g_user->user['given_name'],
                     'last_name' => $g_user->user['family_name'],
                     'username' => $g_user->getNickname(),

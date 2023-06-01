@@ -21,7 +21,7 @@ return new class extends Migration
             $table->integer('converted_points')->default(0);
             $table->timestamps();
 
-            $table->foreign('employee_id')->references('id')->on('employees');
+            $table->foreign('employee_id')->references('id')->on('users');
         });
     }
 

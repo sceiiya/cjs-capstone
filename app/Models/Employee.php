@@ -11,7 +11,8 @@ use Illuminate\Database\Eloquent\Model;
 class Employee extends Authenticatable implements UAuthenticatable
 {
     use HasFactory, Notifiable;
-
+    protected $table = 'users';
+    
     protected $fillable = [
         'first_name',
         'last_name',
