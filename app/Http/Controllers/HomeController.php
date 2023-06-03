@@ -25,4 +25,16 @@ class HomeController extends Controller
     {
         return view('home');
     }
+
+    public function applicantHome(){
+        return view('home', ['msg' => "I am applicant"]);
+    }
+
+    public function employeeHome(){
+        return view('home', ['msg' => "I am employee"]);
+    }
+
+    public function adminHome(){
+        return view('home', ['msg' => "I am admin"]);
+    }
 }

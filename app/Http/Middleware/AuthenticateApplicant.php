@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class AuthenticateAdmin
+class AuthenticateApplicant
 {
     /**
      * Handle an incoming request.
@@ -21,7 +21,6 @@ class AuthenticateAdmin
             return $next($request);  
         }else{
             return response()->json(["You don't have permission to access this page!"]);
-            // return redirect('/login')->with('message', 'Access denieid! Please sign up first!');
         }
     }
 }

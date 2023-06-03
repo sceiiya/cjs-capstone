@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class AuthenticateAdmin
+class AuthenticateRole
 {
     /**
      * Handle an incoming request.
@@ -16,12 +16,13 @@ class AuthenticateAdmin
      */
     public function handle(Request $request, Closure $next, $role): Response
     {
+        //0 = User // 1 = Employee // 2 = Admin
         if(Auth::check() && Auth::user()->role == $role){
-            //0 = User // 1 = Employee // 2 = Admin
             return $next($request);  
         }else{
             return response()->json(["You don't have permission to access this page!"]);
             // return redirect('/login')->with('message', 'Access denieid! Please sign up first!');
         }
+
     }
 }

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\PointsModel;
 use Carbon\Carbon;
+use Dompdf\Dompdf;
 use Illuminate\Support\Facades\Hash;
 
 
@@ -163,9 +164,35 @@ class EmployeeController extends Controller
         return redirect()->route('employees.test.show')->with('success', 'Employee deleted successfully');
     }
 
-    public function logout()
-    {
-        Auth::logout();
-        return redirect('test/google'); // Redirect to the desired page after logout
-    }
+    // public function processSignature(Request $request)
+    // {
+    //     $signatureData = $request->input('signatureData');
+    
+    //     // Generate the PDF using dompdf
+    //     $dompdf = new Dompdf();
+    //     $dompdf->loadHtml('<p>Some content goes here...</p>');
+    
+    //     // Add the signature image to the PDF
+    //     $signatureImage = file_get_contents($signatureData);
+    //     $dompdf->getCanvas()->registerXObject('signatureImage', $signatureImage);
+    //     $dompdf->getCanvas()->drawXObject('signatureImage', ['x' => 100, 'y' => 100, 'width' => 200, 'height' => 100]);
+    
+    //     $dompdf->render();
+    //     $output = $dompdf->output();
+    
+    //     // Save the PDF file or send it as a response to the client
+    //     $filename = 'signed_document.pdf'; // Define a filename for the PDF file
+    //     $path = storage_path('app/public/' . $filename); // Define the storage path for the PDF file
+    
+    //     file_put_contents($path, $output);
+    
+    //     // Alternatively, you can directly send the PDF as a response to the client
+    //     // return response($output, 200)->header('Content-Type', 'application/pdf');
+    
+    //     // You can also store the PDF file path in the database or perform any other necessary actions
+    //     // For example, you can associate the PDF file with a specific user or record
+    
+    //     // Return a response to the client indicating the success or redirect to a success page
+    //     return response()->json(['message' => 'PDF file generated successfully.', 'file_path' => $path]);
+    // }
 }
