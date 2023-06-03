@@ -15,7 +15,9 @@
                     @endif
                         {{ Auth::user()->username }}
                         <br/>
-                        {{ $msg }}
+                        @if(!empty($msg))
+                            {{$msg}}
+                        @endif
                     {{ __('You are logged in!') }}
                 </div>
             </div>

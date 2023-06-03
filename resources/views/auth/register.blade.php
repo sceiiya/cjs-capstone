@@ -5,9 +5,9 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="ps-3 py-2 font-bold text-xl text-slate-50 bg-emerald-400">{{ __('Register') }}</div>
 
-                <div class="card-body">
+                <div class="card-body bg-emerald-300 bg-opacity-10">
                     <form method="POST" action="{{ route('register') }}">
                         @csrf
 
@@ -89,13 +89,27 @@
                             </div>
                         </div>
 
-                        <div class="row mb-0">
-                            <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                        
+                        <div class="mt-4 mb-4 flex items-center justify-center max-h-6">
+                            <div class="">
+                                <button type="submit" class="rounded-md p-2 bg-cyan-600 hover:bg-opacity-80 text-slate-100">
                                     {{ __('Register') }}
                                 </button>
                             </div>
                         </div>
+
+                        <div class="mb-3 inline-flex items-center justify-center w-full">
+                            <hr class="w-64 h-px my-2 bg-gray-200 border-2 dark:bg-gray-700">
+                            <span class="absolute px-3 font-medium text-gray-900 -translate-x-1/2 bg-gray-200 rounded-sm left-1/2 dark:text-white dark:bg-gray-900">or</span>
+                        </div>
+                          
+                          <!-- Sign up with Google -->
+                          <a href="{{ route('google-auth') }}" class="mt-4 mb-6 flex items-center justify-center max-h-6 no-underline">
+                            <div class="rounded-md p-2 bg-slate-50">
+                                <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google Sign-In" class="h-6 w-6 mr-2">
+                                <span class="text-gray-600 font-extrabold">Sign up with Google</span>
+                            </div>
+                          </a>
                     </form>
                 </div>
             </div>

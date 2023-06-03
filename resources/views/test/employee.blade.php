@@ -229,6 +229,37 @@
 
         </section>
         <!-- ---------------============== playground ==============--------------- -->
-
+        <h2>Sign PDF</h2>
+        <div class="p-2 bg-slate-200">
+            <canvas id="signaturePad" width="500" height="200"></canvas>
+        </div>
+        <button onclick="saveSignature()">Save Signature</button>
+    
+        <script>
+            function saveSignature() {
+                var canvas = document.getElementById('signaturePad');
+                var signatureData = canvas.toDataURL(); // Get the signature as base64 data
+    
+                // Send the signature data to the server for processing and generating the PDF
+                $.ajax({
+                    url: '/process-signature',
+                    type: 'POST',
+                    data: {
+                        '_token': '{{ csrf_token() }}',
+                        'signatureData': signatureData
+                    },
+                    success: function(response) {
+                        console.log(response);
+                        // Handle the response from the server, such as displaying a success message or redirecting
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                        // Handle the error, such as displaying an error message to the user
+                    }
+                });
+            }
+    
+            var signaturePad = new SignaturePad(document.getElementById('signaturePad'));
+        </script>
     </body>
 </html>

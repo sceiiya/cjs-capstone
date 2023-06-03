@@ -43,12 +43,13 @@
               <span class="px-2 text-gray-600">or</span>
               <span class="border-t border-gray-400 w-16"></span>
             </div>
-
+            
             <!-- Login with Google -->
             <a href="{{ route('google-auth') }}" class="mt-6 flex items-center justify-center">
-            <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google Sign-In" class="h-6 w-6 mr-2">
+              <img src="https://developers.google.com/identity/images/g-logo.png" alt="Google Sign-In" class="h-6 w-6 mr-2">
               <span class="text-gray-600 font-bold">Log in with Google</span>
             </a>
+            
           </div>
         </div>
 
