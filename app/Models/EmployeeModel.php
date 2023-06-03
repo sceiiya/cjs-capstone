@@ -16,6 +16,7 @@ class EmployeeModel extends Model
         'middle_name',
         'username',
         'email',
+        'phone_number',
         'password',
         'applied_at',
         'joined_at',

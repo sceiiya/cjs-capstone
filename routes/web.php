@@ -3,6 +3,8 @@
 use App\Http\Controllers\Auth\GoogleController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployeeController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MailController;
 use App\Http\Controllers\PointSystemController;
 use App\Http\Controllers\ViewController;
 use Illuminate\Support\Facades\Auth;
@@ -30,6 +32,8 @@ Route::get('test/google', function () {
     return view('test.googleauth');
 })->name('testt.google');
 
+Route::get('test/mail', [MailController::class, 'mail'])->name('first.mail');
+
 //admin
 Route::prefix('admin')->middleware(['auth', 'authAdmin'])->group(function(){
     Route::post('/test/employee/model/register', [EmployeeController::class, 'store'])->name('admin.employees.store');
@@ -37,12 +41,15 @@ Route::prefix('admin')->middleware(['auth', 'authAdmin'])->group(function(){
     Route::get('/test/employee/model/login', [EmployeeController::class, 'viewlogin'])->name('admin.employees.test.login');
 });
 
+// Route::post('/process-signature', [EmployeeController::class, 'processSignature'])->name('sign');
 //employee
 Route::prefix('team')->middleware(['auth', 'authEmployee'])->group(function(){
     Route::post('/test/employee/model/register', [EmployeeController::class, 'store'])->name('team.employees.store');
     Route::get('/test/employee/model/update', [EmployeeController::class, 'update'])->name('team.employees.update');
     Route::get('/test/employee/model/login', [EmployeeController::class, 'viewlogin'])->name('team.employees.test.login');
 });
+
+
 // Route::get('test/employee/model', function () {
 //     return view('test.employee');
 // });
@@ -67,9 +74,12 @@ Route::get('auth/google/call-back', 'App\Http\Controllers\Auth\GoogleController@
 // Route::get('user/logout', [App\Http\Controllers\EmployeeController::class, 'logout'])->name('logout');
 
 //auths
-Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+Auth::routes(['verify' => true]);
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified')->name('home');
+Route::middleware(['verified'])->group(function()
+{
+    Route::get('/home/verified', [App\Http\Controllers\HomeController::class, 'index'])->name('verifiedhome');
+});
 
 
 //points routes
@@ -82,3 +92,22 @@ Route::put('test/points/model/{employeeID}/convert', [PointSystemController::cla
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+// Applicant Routes
+Route::middleware(['auth', 'authRole:applicant'])->group( function()
+{
+    Route::get("/home", [HomeController::class, 'applicantHome'])->name('Hhome');
+});
+
+// Employee Routes
+Route::prefix('team')->middleware(['auth', 'authRole:employee'])->group( function()
+{
+    Route::get("/home", [HomeController::class, 'employeeHome'])->name('employee.Hhome');
+});
+
+// Admin Routes
+Route::prefix('admin')->middleware(['auth', 'authRole:admin'])->group( function()
+{
+    Route::get("/home", [HomeController::class, 'adminHome'])->name('admin.Hhome');
+});
