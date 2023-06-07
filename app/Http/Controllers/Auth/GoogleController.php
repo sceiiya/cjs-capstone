@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use PhpParser\Node\Stmt\TryCatch;
 use Illuminate\Support\Str;
 use App\Models\PointsModel;
+use Carbon\Carbon;
 
 class GoogleController extends Controller
 {
@@ -24,27 +25,12 @@ class GoogleController extends Controller
         try {
             $g_user = Socialite::driver('google')->user();
 
-            $token = $g_user->token;
-            $refreshToken = $g_user->refreshToken;
-            $expiresIn = $g_user->expiresIn;
+            // $token = $g_user->token;
+            // $refreshToken = $g_user->refreshToken;
+            // $expiresIn = $g_user->expiresIn;
 
             $user = User::where('google_id', $g_user->getId())->first();
-        
-                // $nname = $g_user->getName();
-                // $nnemail = $g_user->getEmail();
-                // $nnid = $g_user->getId();
-                // $UZER =  `<br/>token: $token<br/>reftoken: $refreshToken<br/>expires: $expiresIn<br/>name: $g_user->getName()<br/>first name: $g_user->user['given_name']<br/>last name: $g_user->user['family_name']<br/>email: $g_user->getEmail()<br/>gug ID: $g_user->getId()<br/>avatar: $g_user->getAvatar()<br/>nickname: $g_user->getNickname()`;
-                 echo  '<br/>token: '.$token.'<br/>reftoken: '.$refreshToken.'<br/>expires: '.$expiresIn.'<br/>name: '.$g_user->getName().'<br/>first name: '.$g_user->user["given_name"].'<br/>last name: '.$g_user->user["family_name"].'<br/>email: '.$g_user->getEmail().'<br/>gug ID: '.$g_user->getId().'<br/>avatar: '.$g_user->getAvatar().'<br/>nickname: '.$g_user->getNickname();
-
-                // print_r([
-                //     'name' => $g_user->getName(),
-                //     'first_name' => $g_user->user['given_name'],
-                //     'last_name' => $g_user->user['family_name'],
-                //     'email' => $g_user->getEmail(),
-                //     'google_id' => $g_user->getId(),
-                //     'avatar' => $g_user->getAvatar(),
-                // ]);
-        
+                
             if(!$user){
                 $password = Str::random(10);
                 $new_user = User::create([
@@ -55,9 +41,8 @@ class GoogleController extends Controller
                     'google_id' => $g_user->getId(),
                     'profile_pic' => $g_user->getAvatar(),
                     'password' => bcrypt($password),
-                    'status' => 'verified',
+                    'email_verified_at' => Carbon::now(),
                     
-                    // Create a new record in the point_system table
                 ]);
 
                 $PointsModel = new PointsModel();
@@ -66,13 +51,36 @@ class GoogleController extends Controller
 
                 Auth::login($new_user);
 
-                $mParam['logmsg'] = 'You are a new user who just created an account trough Google Auth';
-                // return redirect()->intended('test/google')->with($mParam);
-                return view('test.googleauth', $mParam);
+                // $mParam['logmsg'] = 'You are a new user who just created an account trough Google Auth';
+                return redirect()->intended('home')->with('Welcome aboard '.$g_user->user["given_name"].'!');
+                // return view('test.googleauth', $mParam);
             }else{
+
                 Auth::login($user);
-                $mParam['logmsg'] = 'Already have account therefore you shoud be logged in rn';
-                return view('test.googleauth', $mParam);
+
+                // switch ($user->role) {
+                //     case 0: // Applicant
+                //         return redirect()->route('applicant.index')->with('success', 'Welcome back, ' . $g_user->user["given_name"] . '!');
+                //         break;
+                //     case 1: // Employee
+                //         return redirect()->route('employee.index')->with('success', 'Welcome back, ' . $g_user->user["given_name"] . '!');
+                //         break;
+                //     case 2: // Admin
+                //         return redirect()->route('admin.index')->with('success', 'Welcome back, ' . $g_user->user["given_name"] . '!');
+                //         break;
+                //     default:
+                //         return redirect()->route('home');
+                // }
+
+                if($user->role == 2){
+                    return redirect()->route('admin.index')->with('status', 'Welcome back ' . $g_user->user["given_name"] . '!');
+                }elseif($user->role == 1){
+                    return redirect()->route('employee.index')->with('status', 'Welcome back ' . $g_user->user["given_name"] . '!');
+                }else{
+                    return redirect()->route('applicant.index')->with('status', 'Welcome aboard ' . $g_user->user["given_name"] . '!');
+                }
+                // $mParam['logmsg'] = 'Already have account therefore you shoud be logged in rn';
+                // return view('home', $mParam);
                 // return redirect()->intended('test/google')->with($mParam);
 
                 // return redirect()->intended('/');
