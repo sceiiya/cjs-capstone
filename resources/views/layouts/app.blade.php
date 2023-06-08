@@ -51,7 +51,7 @@
                             <li class="">
                                 <a id="navbarDropdown" class="text-slate-100 no-underline font-bold nunito-font bg-unset" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ !empty(Auth::user()->username) ? Auth::user()->username : Auth::user()->first_name }}
-                                    <img src="{{ !empty(Auth::user()->profile_pic) ? Auth::user()->profile_pic : asset('src/images/logos/defo_profile.png') }}" style="max-height: 38px;">
+                                    <img src="{{ !empty(Auth::user()->profile_pic) ? Auth::user()->profile_pic : asset('src/images/logos/defo_profile.png') }}" class="rounded-full" style="max-height: 38px;">
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">

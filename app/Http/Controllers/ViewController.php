@@ -29,4 +29,10 @@ class ViewController extends Controller
         // return $employee;
         return view('test.employee', $mParam);
     }
+
+    public function applicanthome()
+    {
+        $pData['title'] = 'Applicant Page';
+        return view('applicant.homepage', $pData);
+    }
 }

@@ -52,7 +52,8 @@ Route::get('auth/google/call-back', 'App\Http\Controllers\Auth\GoogleController@
 Route::middleware(['auth', 'authRole:applicant'])->group( function()
 // Route::middleware(['auth', 'verified', 'authRole:applicant'])->group( function()
 {
-    Route::get("home", [HomeController::class, 'applicantHome'])->name('applicant.index');
+    Route::get("home", [ViewController::class, 'applicanthome'])->name('applicant.index');
+    // Route::get("home", [HomeController::class, 'applicantHome'])->name('applicant.index');
 });
 
 // Employee Routes
