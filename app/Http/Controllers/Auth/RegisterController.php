@@ -84,6 +84,26 @@ class RegisterController extends Controller
         Session::push('user', [
             'name' => $data['first_name'].' '.$data['last_name'],
             'email' => $data['email'],
+            'Mid' => $employee->id,
+            'Mfirst_name' => $data['first_name'],
+            'Mlast_name' => $data['last_name'],
+            'Mmiddle_name' => $employee->middle_name,
+            'Musername' => $employee->username,
+            'Memail' => $data['email'],
+            'Mphone_number' => $employee->phone_number,
+            'Mapplied_at' => $employee->applied_at,
+            'Mjoined_at' => $employee->joined_at,
+            'Mstatus' => $employee->status,
+            'Mprofile_pic' => $employee->profile_pic,
+            'Mjob_position' => $employee->job_position,
+            'Mjob_type' => $employee->job_type,
+            'Mcountry' => $employee->country,
+            'Mcity' => $employee->city,
+            'Mprovince_state' => $employee->province_state,
+            'Mstreet' => $employee->street,
+            'Mpostal_id' => $employee->postal_id,
+            'Memail_verified_at' => $employee->email_verified_at,
+    
         ]);
 
         return $employee;

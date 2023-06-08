@@ -24,17 +24,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('test/google', function () {
-    return view('test.googleauth');
-})->name('testt.google');
+// Route::get('test/google', function () {
+//     return view('test.googleauth');
+// })->name('testt.google');
 
-Route::get('test/mail', [MailController::class, 'mail'])->name('first.mail');
+// Route::get('test/mail', [MailController::class, 'mail'])->name('first.mail');
 
 
 //auths
 Auth::routes(['verify' => true]);
 // Auth::routes();
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified')->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified')->name('home');
 Route::middleware(['verified'])->group(function()
 {
     Route::get('/home/verified', [App\Http\Controllers\HomeController::class, 'index'])->name('verifiedhome');
@@ -52,7 +52,7 @@ Route::get('auth/google/call-back', 'App\Http\Controllers\Auth\GoogleController@
 Route::middleware(['auth', 'authRole:applicant'])->group( function()
 // Route::middleware(['auth', 'verified', 'authRole:applicant'])->group( function()
 {
-    Route::get("ahome", [HomeController::class, 'applicantHome'])->name('applicant.index');
+    Route::get("home", [HomeController::class, 'applicantHome'])->name('applicant.index');
 });
 
 // Employee Routes
