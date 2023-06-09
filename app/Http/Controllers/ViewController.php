@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\DataModel;
 use App\Models\EmployeeModel;
+use Illuminate\Support\Facades\Session;
 
 class ViewController extends Controller
 {
@@ -30,6 +31,7 @@ class ViewController extends Controller
         return view('test.employee', $mParam);
     }
 
+    //====================== Home view methods ======================
     public function applicanthome()
     {
         $pData['title'] = 'Applicant Page';
@@ -46,5 +48,14 @@ class ViewController extends Controller
     {
         $pData['title'] = 'Admin Page';
         return view('applicant.homepage', $pData);
+    }
+
+
+    //====================== applicant methods ======================
+    public function applicantform()
+    {
+        $pData['usercreds'] = Session::get('user');
+        $pData['title'] = 'Application Form';
+        return view('applicant.form', $pData);
     }
 }

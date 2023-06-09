@@ -54,6 +54,8 @@ Route::middleware(['auth', 'authRole:applicant'])->group( function()
 {
     Route::get("home", [ViewController::class, 'applicanthome'])->name('applicant.index');
     // Route::get("home", [HomeController::class, 'applicantHome'])->name('applicant.index');
+    Route::get("apply", [ViewController::class, 'applicantform'])->name('applicant.form');
+
 });
 
 // Employee Routes
