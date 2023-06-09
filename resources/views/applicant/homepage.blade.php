@@ -2,8 +2,34 @@
 
 @section('content')
 
-<div class="bg-orange-400">
-    <h1>This is it</h1>
+<div class="bg-orange-400 w-11/12">
+    <h1>This is it</h1><br/>
+    <h1>This is it</h1><br/>
+    <h1>This is it</h1><br/>
+    <h1>This is it</h1><br/>
+    <h1>This is it</h1><br/>
+
+    <h1>This is it</h1><br/>
+    <h1>This is it</h1><br/>
+    <h1>This is it</h1><br/>
+    <h1>This is it</h1><br/>
+    <h1>This is it</h1><br/>
+    <h1>This is it</h1><br/>
+    <h1>This is it</h1><br/>
+    <h1>This is it</h1><br/>
+    <h1>This is it</h1><br/>
+    <h1>This is it</h1><br/>
+    <h1>This is it</h1><br/>
+    <h1>This is it</h1><br/>
+    <h1>This is it</h1><br/>
+    <h1>This is it</h1><br/>
+    <h1>This is it</h1><br/>
+    <h1>This is it</h1><br/>
+    <h1>This is it</h1><br/>
+    <h1>This is it</h1><br/>
+    <h1>This is it</h1><br/>
+    <h1>This is it</h1><br/>
+    <h1>This is it</h1><br/>
 </div>
 
 @endsection

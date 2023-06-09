@@ -60,7 +60,7 @@ Route::middleware(['auth', 'authRole:applicant'])->group( function()
 Route::prefix('team')->middleware(['auth', 'authRole:employee'])->group( function()
 // Route::prefix('team')->middleware(['auth', 'verified', 'authRole:employee'])->group( function()
 {
-    Route::get("home", [HomeController::class, 'employeeHome'])->name('employee.index');
+    Route::get("home", [ViewController::class, 'employeehome'])->name('employee.index');
     //points routes
     Route::get('points/display', [PointSystemController::class, 'index'])->name('display-points');
     Route::get('points/{employeeID}/show', [PointSystemController::class, 'show'])->name('show-points');
@@ -73,7 +73,7 @@ Route::prefix('team')->middleware(['auth', 'authRole:employee'])->group( functio
 Route::prefix('admin')->middleware(['auth', 'authRole:admin'])->group( function()
 // Route::prefix('admin')->middleware(['auth', 'verified', 'authRole:admin'])->group( function()
 {
-    Route::get("home", [HomeController::class, 'adminHome'])->name('admin.index');
+    Route::get("home", [ViewController::class, 'adminhome'])->name('admin.index');
 
     // Route::get('test/employee/model', function () {
     //     return view('test.employee');
