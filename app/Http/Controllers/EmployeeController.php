@@ -9,10 +9,11 @@ use App\Models\EmployeeModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\PointsModel;
+use Barryvdh\DomPDF\PDF;
 use Carbon\Carbon;
 use Dompdf\Dompdf;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Support\Facades\Mail;
 
 class EmployeeController extends Controller
 {
@@ -244,7 +245,43 @@ class EmployeeController extends Controller
             'about_me' => $formdata['about_me'],
         ]);
 
+        $user = Auth::user();
+        $data = ['name' => $user->first_name];
+
+        Mail::send('home', $data, function($message) use ($user)
+        {
+            $message->to($user->email, $user->first_name)->subject('HR Solutions | Application Submitted');
+            $message->attach(public_path('documents/submitted.txt'));
+            $message->from('no-reply@hr-solutions.wd49p.com', 'HR Solutions');
+        });
         return redirect()->route('applicant.form')->with('success', 'Application submitted successfully! We also sent you what you submitted, please check you Email!');
     }
+
+    public function viewApplication(PDF $pdf)
+    {
+        $user = Auth::user();
+        $pData['user'] = $user;
+        $pData['applicantForm'] = Applicants::where('employee_id', $user->id)->get()->first();
+        $pData['title'] = $user->first_name;
+        $form = $pdf->loadView('applicant.application', $pData);
+
+        return $form->stream($user->first_name.'-application-form.pdf');
+    }
+
+    public function downloadApplication(PDF $pdf)
+    {
+        // $form = $pdf->loadHTML('<h1>hakdog</ht');
+        $user = Auth::user();
+        // return $user;
+        // return Applicants::where('employee_id', $user->id)->get()->first();
+        $pData['user'] = $user;
+        $pData['applicantForm'] = Applicants::where('employee_id', $user->id)->get()->first();
+        $pData['title'] = $user->first_name;
+        $form = $pdf->loadView('applicant.application', $pData);
+
+        return $form->download($user->first_name.'-application-form.pdf');
+    }
+
+
 }
 

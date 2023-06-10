@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Applicants;
 use Illuminate\Http\Request;
 use App\Models\DataModel;
 use App\Models\EmployeeModel;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class ViewController extends Controller
@@ -57,5 +59,16 @@ class ViewController extends Controller
         $pData['usercreds'] = Session::get('user');
         $pData['title'] = 'Application Form';
         return view('applicant.form', $pData);
+    }
+
+    public function applicantstatus()
+    {   
+        $user = Auth::user();
+        // return Applicants::where('employee_id', $user->id)->get();
+        $pData['usercreds'] = Session::get('user');
+        $pData['user'] = $user;
+        $pData['applicantForm'] = Applicants::where('employee_id', $user->id)->get();
+        $pData['title'] = 'Application Status';
+        return view('applicant.status', $pData);
     }
 }

@@ -23,19 +23,13 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('/home');
 });
-
-// Route::get('test/google', function () {
-//     return view('test.googleauth');
-// })->name('testt.google');
-
-// Route::get('test/mail', [MailController::class, 'mail'])->name('first.mail');
-
 
 //auths
 Auth::routes(['verify' => true]);
-// Auth::routes();
+
+//if required verified first before viewing home
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->middleware('verified')->name('home');
 Route::middleware(['verified'])->group(function()
 {
@@ -47,24 +41,24 @@ Route::get('auth/google', [GoogleController::class, 'redirect'])->name('google-a
 Route::get('auth/google/call-back', 'App\Http\Controllers\Auth\GoogleController@handleGoogleCallback');
 
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::get("Philippines", [PhGeoLocationsController::class, 'show'])->name('applicant.form.phgeoloc');
 
 // Applicant Routes
-Route::middleware(['auth', 'authRole:applicant'])->group( function()
-// Route::middleware(['auth', 'verified', 'authRole:applicant'])->group( function()
+Route::middleware(['auth', 'verified', 'authRole:applicant'])->group( function()
 {
     Route::get("home", [ViewController::class, 'applicanthome'])->name('applicant.index');
-    // Route::get("home", [HomeController::class, 'applicantHome'])->name('applicant.index');
     Route::get("apply", [ViewController::class, 'applicantform'])->name('applicant.form');
     Route::post("apply/submit", [EmployeeController::class, 'application'])->name('submit.applicant.form');
+
+    Route::get("application/status", [ViewController::class, 'applicantstatus'])->name('status.applicant.form');
+    Route::post("application/view/submitted", [EmployeeController::class, 'viewApplication'])->name('viewpdf.applicant.form');
+    Route::post("application/download/submitted", [EmployeeController::class, 'downloadApplication'])->name('downloadpdf.applicant.form');
 
 });
 
 // Employee Routes
-Route::prefix('team')->middleware(['auth', 'authRole:employee'])->group( function()
-// Route::prefix('team')->middleware(['auth', 'verified', 'authRole:employee'])->group( function()
+Route::prefix('team')->middleware(['auth', 'verified', 'authRole:employee'])->group( function()
 {
     Route::get("home", [ViewController::class, 'employeehome'])->name('employee.index');
     //points routes
@@ -76,14 +70,16 @@ Route::prefix('team')->middleware(['auth', 'authRole:employee'])->group( functio
 });
 
 // Admin Routes
-Route::prefix('admin')->middleware(['auth', 'authRole:admin'])->group( function()
-// Route::prefix('admin')->middleware(['auth', 'verified', 'authRole:admin'])->group( function()
+Route::prefix('admin')->middleware(['auth', 'verified', 'authRole:admin'])->group( function()
 {
     Route::get("home", [ViewController::class, 'adminhome'])->name('admin.index');
 
-    // Route::get('test/employee/model', function () {
-    //     return view('test.employee');
-    // });
+
+    //test routes
+    Route::get('test/employee/model', function () {return view('test.employee');});
+    Route::get('test/google', function () {return view('test.googleauth');})->name('testt.google');
+    Route::get('test/mail', [MailController::class, 'mail'])->name('first.mail');
+
     Route::get('employee', [EmployeeController::class, 'testcrud'])->name('employee-crud');
     Route::get('employee/res', [EmployeeController::class, 'testcrud'])->name('employees.index');
     Route::post('employee/register', [EmployeeController::class, 'store'])->name('employees.store');

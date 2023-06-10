@@ -98,7 +98,7 @@
                         </li>
                         @applicant
                         <li class="mb-2 max-sm:mb-0">
-                            <a href="#" class="flex items-center py-2 max-sm:py-3 ps-3 max-sm:ps-0 text-slate-100 hover:text-emerald-600 transition-all ease-in-out">
+                            <a href="{{ route('status.applicant.form') }}" class="flex items-center py-2 max-sm:py-3 ps-3 max-sm:ps-0 text-slate-100 hover:text-emerald-600 transition-all ease-in-out">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 max-sm:w-6 max-sm:h-6 fill-slate-100 hover:fill-emerald-600 focus:fill-emerald-600 transition-all ease-in-out" viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><path d="M448 160H320V128H448v32zM48 64C21.5 64 0 85.5 0 112v64c0 26.5 21.5 48 48 48H464c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48H48zM448 352v32H192V352H448zM48 288c-26.5 0-48 21.5-48 48v64c0 26.5 21.5 48 48 48H464c26.5 0 48-21.5 48-48V336c0-26.5-21.5-48-48-48H48z"/></svg>
                                 <span class="ml-3 max-md:translate-x-44 max-md:hidden truncate">Status</span>
                             </a>
@@ -142,7 +142,7 @@
                                 <span class="ml-3 max-md:translate-x-44 max-md:hidden truncate">About Us</span>
                             </a>
                         </li>
-                        @applicant
+                        {{-- @applicant
                         <li class="mb-2 max-sm:mb-0">
                             <a href="#" class="flex items-center py-2 max-sm:py-3 ps-3 max-sm:ps-0 text-slate-100 hover:text-emerald-600 transition-all ease-in-out">
                                 <svg class="w-5 h-5 max-sm:w-6 max-sm:h-6 fill-slate-100 hover:fill-emerald-600 focus:fill-emerald-600 transition-all ease-in-out" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -173,7 +173,7 @@
                                 <span class="ml-3 max-md:translate-x-44 max-md:hidden truncate">ADMIN</span>
                             </a>
                         </li>
-                        @endadmin
+                        @endadmin --}}
 
                     </ul>
                 </nav>
