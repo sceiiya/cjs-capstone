@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
+use App\Models\Applicants;
 use App\Models\Employee;
 use App\Models\EmployeeModel;
 use Illuminate\Http\Request;
@@ -195,4 +196,55 @@ class EmployeeController extends Controller
     //     // Return a response to the client indicating the success or redirect to a success page
     //     return response()->json(['message' => 'PDF file generated successfully.', 'file_path' => $path]);
     // }
+    public function application(Request $request, EmployeeModel $employee)
+    {
+        // Validate the request data
+        $data = $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'middle_name' => 'nullable',
+            'job_position' => 'required',
+            'job_type' => 'required',
+            'country' => 'required',
+            'city' => 'required',
+            'province_state' => 'required',
+            'street' => 'required',
+            'postal_id' => 'required|numeric',
+        ]);
+
+        $formdata = $request->validate([
+            'employee_id' => 'required',
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'middle_name' => 'nullable',
+            'job_position' => 'required',
+            'job_type' => 'required',
+            'country' => 'required',
+            'highest_ed' => 'required',
+            'highest_ed_attended' => 'required',
+            'last_occupation' => 'required',
+            'last_occupation_attended' => 'required',
+            'about_me' => 'required',
+        ]);
+
+        $employee->update($data);
+        
+        Applicants::create([
+            'employee_id' => $formdata['employee_id'],
+            'first_name' => $formdata['first_name'],
+            'last_name' => $formdata['last_name'],
+            'middle_name' => $formdata['middle_name'],
+            'job_position' => $formdata['job_position'],
+            'job_type' => $formdata['job_type'],
+            'country' => $formdata['country'],
+            'highest_ed' => $formdata['highest_ed'],
+            'highest_ed_attended' => $formdata['highest_ed_attended'],
+            'last_occupation' => $formdata['last_occupation'],
+            'last_occupation_attended' => $formdata['last_occupation_attended'],
+            'about_me' => $formdata['about_me'],
+        ]);
+
+        return redirect()->route('applicant.form')->with('success', 'Application submitted successfully! We also sent you what you submitted, please check you Email!');
+    }
 }
+

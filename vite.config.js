@@ -11,6 +11,7 @@ export default defineConfig({
                 'resources/js/app.js',
                 'resources/js/jquery-3.7.0.min.js',
                 'resources/js/mainpage.js',
+                'resources/js/applicantForms.js',
             ],
             refresh: true,
         }),

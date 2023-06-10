@@ -181,12 +181,12 @@
             @vite('resources/js/mainpage.js')
             <main class="flex-1 overflow-y-auto items-center px-1 mt-20 max-sm:mt-0">
                 @if(session()->has('success'))
-                <div class="ring-1 ring-emerald-600 p-3 absolute top-15 w-4/6 bg-emerald-100">
+                <div class="ring-1 ring-emerald-600 p-3 absolute top-6 w-4/6 bg-emerald-100">
                     {{session('success')}}
                 </div>
                 @endif
                 @if($errors->any())
-                <ul class="ring-1 ring-emerald-600 p-3 absolute top-15 w-4/6 bg-emerald-100">
+                <ul class="ring-1 ring-emerald-600 p-3 absolute top-6 w-4/6 bg-emerald-100">
                     @foreach($errors->all() as $error)
                         <li class="">
                         {{$error}}

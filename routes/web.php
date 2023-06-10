@@ -5,8 +5,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MailController;
+use App\Http\Controllers\PhGeoLocationsController;
 use App\Http\Controllers\PointSystemController;
 use App\Http\Controllers\ViewController;
+use App\Models\PhGeoLocations;
 use Illuminate\Support\Facades\Auth;
 
 /*
@@ -47,6 +49,7 @@ Route::get('auth/google/call-back', 'App\Http\Controllers\Auth\GoogleController@
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get("Philippines", [PhGeoLocationsController::class, 'show'])->name('applicant.form.phgeoloc');
 
 // Applicant Routes
 Route::middleware(['auth', 'authRole:applicant'])->group( function()
@@ -55,6 +58,7 @@ Route::middleware(['auth', 'authRole:applicant'])->group( function()
     Route::get("home", [ViewController::class, 'applicanthome'])->name('applicant.index');
     // Route::get("home", [HomeController::class, 'applicantHome'])->name('applicant.index');
     Route::get("apply", [ViewController::class, 'applicantform'])->name('applicant.form');
+    Route::post("apply/submit", [EmployeeController::class, 'application'])->name('submit.applicant.form');
 
 });
 

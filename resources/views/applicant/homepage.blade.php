@@ -1,43 +1,10 @@
 @extends('layouts.page')
 
 @section('content')
-
-<div class="bg-orange-400 w-11/12">
-    <h1>This is it</h1><br/>
-    <h1>This is it</h1><br/>
-    <h1>This is it</h1><br/>
-    <h1>This is it</h1><br/>
-    <h1>This is it</h1><br/>
-
-    <h1>This is it</h1><br/>
-    <h1>This is it</h1><br/>
-    <h1>This is it</h1><br/>
-    <h1>This is it</h1><br/>
-    <h1>This is it</h1><br/>
-    <h1>This is it</h1><br/>
-    <h1>This is it</h1><br/>
-    <h1>This is it</h1><br/>
-    <h1>This is it</h1><br/>
-    <h1>This is it</h1><br/>
-    <h1>This is it</h1><br/>
-    <h1>This is it</h1><br/>
-    <h1>This is it</h1><br/>
-    <h1>This is it</h1><br/>
-    <h1>This is it</h1><br/>
-    <h1>This is it</h1><br/>
-    <h1>This is it</h1><br/>
-    <h1>This is it</h1><br/>
-    <h1>This is it</h1><br/>
-    <h1>This is it</h1><br/>
-    <h1>This is it</h1><br/>
-</div>
-
-@endsection
-
-@section('will')
-
-<div class="bg-purple-400">
-    <h1>This is WILL</h1>
+<div class="text-center w-full flex items-center h-full">
+<a class="m-auto p-6 bg-emerald-400 rounded-md text-slate-50" href="{{ route('applicant.form') }}">
+    <h1>Apply Now!</h1>
+</a>
 </div>
 
 @endsection

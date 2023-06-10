@@ -30,11 +30,11 @@ class EmployeeFactory extends Factory
             'username' => $this->faker->userName(),
             'email' => $this->faker->email(),
             'phone_number' => $this->faker->phoneNumber(),
-            'password' => Hash::make('password'), // Assuming you want to store a hashed password
+            'password' => Hash::make('password'),
             'applied_at' => $this->faker->dateTimeBetween('-2 years', 'now'),
             'joined_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
             'status' => 'active',
-            'job_position' => $this->faker->jobTitle(),
+            'job_position' => $this->faker->randomElement(['HR Manager', 'Recruiter', 'Training Specialist', 'Compensation Analyst', 'Sales Representative', 'Marketing Manager', 'Digital Marketing Specialist', 'Brand Ambassador', 'Financial Controller', 'Accounts Payable Clerk', 'Financial Analyst', 'Tax Specialist', 'Operations Manager', 'Logistics Coordinator', 'Procurement Officer', 'Quality Assurance Specialist', 'IT Project Manager', 'Database Administrator', 'Software Engineer', 'Cybersecurity Analyst', 'Graphic Designer', 'Copywriter', 'UI/UX Designer', 'Art Director']),
             'job_type' => $this->faker->randomElement(['Pull-Time', 'Part-Time']),
             'country' => $this->faker->country(),
             'city' => $this->faker->city(),
