@@ -248,7 +248,7 @@ class EmployeeController extends Controller
         $user = Auth::user();
         $data = ['name' => $user->first_name];
 
-        Mail::send('home', $data, function($message) use ($user)
+        Mail::send('applicant.submitted', $data, function($message) use ($user)
         {
             $message->to($user->email, $user->first_name)->subject('HR Solutions | Application Submitted');
             $message->attach(public_path('documents/submitted.txt'));
