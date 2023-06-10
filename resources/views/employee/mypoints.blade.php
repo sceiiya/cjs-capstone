@@ -7,22 +7,6 @@
 <div id="employeeTable"></div>
 
 <!-- Create Employee Form -->
-    @if($errors->any())
-        <ul>
-            @foreach($errors->all() as $error)
-                <li class="">
-                {{$error}}
-                </li>
-            @endforeach
-        </ul>
-    @endif
-    @if(session()->has('status'))
-    <ul>
-            <li class="">
-            {{session('status')}}
-            </li>
-    </ul>
-@endif
 <div class="flex flex-row w-full justify-between mb-4">
 <form class="flex flex-col w-full" id="PontsForm" method="POST" action="{{ route('increment-points', [ 'employeeID' => encrypt(auth()->user()->id), 'in_add' => encrypt(255), 'csrf' => csrf_token()]) }}">
     @csrf
