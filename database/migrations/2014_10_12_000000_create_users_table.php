@@ -16,7 +16,7 @@ return new class extends Migration
             //0 = Applicant // 1 = Employee // 2 = Admin
             $table->tinyInteger('role')->default(0);
             $table->string('first_name');
-            $table->string('last_name');
+            $table->string('last_name')->nullable();
             $table->string('middle_name')->nullable();
             $table->string('username')->nullable();
             $table->string('email')->unique();
